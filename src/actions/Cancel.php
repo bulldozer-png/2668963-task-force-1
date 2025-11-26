@@ -16,10 +16,7 @@ class Cancel extends Action
     }
     public function checkPermissions($customerId, $performerId, $userId): bool
     {
-        if ($userId === $customerId && $userId !== $performerId ){
-            return true;
-        }
-        return false;
+        return $userId === $customerId && $userId !== $performerId;
     }
 
 }

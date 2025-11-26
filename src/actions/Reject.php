@@ -16,10 +16,7 @@ class Reject extends Action
     }
     public function checkPermissions($customerId, $performerId, $userId): bool
     {
-        if ($userId === $performerId && $userId !== $customerId){
-            return true;
-        }
-        return false;
+        return $userId === $performerId && $userId !== $customerId;
     }
 
 }
