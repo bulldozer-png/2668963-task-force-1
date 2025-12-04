@@ -18,7 +18,7 @@ class CsvToSqlConverter
         $values = [];
         
         do{
-            $row = $fileObject->fgetcsv();
+            $row = $fileObject->fgetcsv(",", "\"", "\\");
 
             if ($fileObject->key() === 0) {
                 $sql .= ' (' . implode(',', $row) . ') VALUES' . PHP_EOL;
