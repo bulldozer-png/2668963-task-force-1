@@ -43,9 +43,27 @@ use yii\widgets\ActiveForm;
         <?php endif; ?>
         
         <div class="task-map">
-            <img class="map" src="<?= Yii::getAlias('@web/img/map.png') ?>"  width="725" height="346" alt="">
+            <div id="map" style="width: 100%; height: 400px"></div>
+            <script type="text/javascript">
+                // Функция ymaps.ready() будет вызвана, когда
+                // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+                ymaps.ready(init);
+                function init(){
+                    // Создание карты.
+                    var myMap = new ymaps.Map("map", {
+                        // Координаты центра карты.
+                        // Порядок по умолчанию: «широта, долгота».
+                        // Чтобы не определять координаты центра карты вручную,
+                        // воспользуйтесь инструментом Определение координат.
+                        center: [<?= $task->city->latitude_deg ?> , <?= $task->city->longitude_deg ?>],
+                        // Уровень масштабирования. Допустимые значения:
+                        // от 0 (весь мир) до 19.
+                        zoom: 12
+                    });
+                }
+            </script>
             <p class="map-address town"><?= $task->city->name ?></p>
-            <p class="map-address"><?= $task->location ?></p>
+            <p class="map-address"><?= $task->city->latitude_deg ?> ; <?= $task->city->longitude_deg ?></p>
         </div>
 
         <h4 class="head-regular">Отклики на задание</h4>
