@@ -20,7 +20,16 @@
 
         <?= $form->field($task, 'category_id')->dropDownList($categoryList)->label('Категория [category]') ?>
 
-        <?= $form->field($task, 'location')->textInput(['class' => 'location-icon'])->label('Локация') ?>
+        <?= $form->field($task, 'location')->textInput([
+            'class' => 'location-icon', 
+            'id' => 'autoComplete', 
+            'autocomplete' => 'off'])
+            ->label('Локация') ?>
+
+        <?= $form->field($task, 'city_id')
+            ->hiddenInput(['id' => 'city_id'])
+            ->label(false) ?>
+
         
         <div class="half-wrapper">
             <?= $form->field($task, 'budget')->textInput(['class' => 'budget-icon'])->label('Бюджет') ?>
@@ -36,6 +45,39 @@
         <input type="submit" class="button button--blue" value="Опубликовать">
 
         <?php ActiveForm::end(); ?>
+        
+    <script>
+        const geoAutoComplete = new autoComplete({
+            selector: '#autoComplete',
+            placeHolder: 'Введите город...',
+            data: {
+                src: async (query) => {
+                    const response = await fetch('/location/search?q=' + query);
+                    return await response.json();
+                },
+                keys: ['label'],
+            },
+            resultItem: {
+                highlight: true
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        const city = event.detail.selection.value;
+
+                        geoAutoComplete.input.value = city.label;
+                        document.getElementById('city_id').value = city.id;
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('autoComplete').addEventListener('input', () => {
+            document.getElementById('city_id').value = '';
+        });
+    </script>
 
     </div>
 </main>

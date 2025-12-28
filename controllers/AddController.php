@@ -39,7 +39,7 @@ class AddController extends Controller
             $task->load(Yii::$app->request->post());
 
             $task->status = 'new';
-            $task->city_id = 777;
+            // $task->city_id = 777;
             $task->customer_id = Yii::$app->user->identity->id;
 
             $task->deadline = date(

@@ -24,6 +24,12 @@
             filter: brightness(0.5);
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.9/dist/autoComplete.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.9/dist/css/autoComplete.min.css">
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=<?= getenv('API_MAPS_KEY') ?>&lang=ru_RU" type="text/javascript">
+    </script>
 </head>
 <body>
     <header class="page-header">
