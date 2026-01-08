@@ -5,6 +5,7 @@
     if (!Yii::$app->user->isGuest) {
         $user = Yii::$app->user->identity;
         $username = $user->name;
+        echo date('Y-m-d H:i:s'); echo ' | '; echo $user?->id; echo ' | '; echo $user?->email; 
     }
     // $user = Yii::$app->user->identity;
 ?>
@@ -12,9 +13,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <?php echo date('Y-m-d H:i:s'); echo ' | '; echo $user?->id; echo ' | '; echo $user?->email; 
-    ?>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Taskforce</title>

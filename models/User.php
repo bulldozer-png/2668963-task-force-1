@@ -61,15 +61,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         // TODO: Implement findIdentityByAccessToken() method.
+        return static::findOne(['access_token' => $token]);
+
     }
     public function getAuthKey()
     {
         // TODO: Implement getAuthKey() method.
+        return $this->auth_key;
     }
 
     public function validateAuthKey($authKey)
     {
         // TODO: Implement validateAuthKey() method.
+        return $this->auth_key === $authKey;
+
     }
 
     

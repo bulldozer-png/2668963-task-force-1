@@ -197,6 +197,7 @@
 <?php
 /* @var $model User */
 
+use yii\authclient\widgets\AuthChoice;
 use yii\widgets\ActiveForm;
 use yii\widgets\ActiveField; ?>
 
@@ -226,6 +227,21 @@ use yii\widgets\ActiveField; ?>
     <?php ActiveForm::end(); ?>
     <button class="form-modal-close" type="button">Закрыть</button>
     
+    <div style="display:inline-block;width:100%;margin-top: 10px;" class="github_login">
+        <?php 
+        $authAuthChoice = AuthChoice::begin([
+            'baseAuthUrl' => ['auth/auth'],
+        ]);
+
+        foreach ($authAuthChoice->getClients() as $client) {
+            echo $authAuthChoice->clientLink($client, 'Войти через GitHub');
+        }
+
+        AuthChoice::end();
+        ?>
+    </div>
+
+
 </section>
 
 <div class="overlay"></div>

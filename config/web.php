@@ -29,6 +29,17 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authClientCollection' => [
+            'class' => yii\authclient\Collection::class,
+            'clients' => [
+                'github' => [
+                    'class' => yii\authclient\clients\GitHub::class,
+                    'clientId' => $_ENV['CLIENT_ID'],
+                    'clientSecret' => $_ENV['CLIENT_SECRET'],
+                    'scope' => 'user:email',
+                ],
+            ],
+        ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
